@@ -29,7 +29,7 @@ class handler(BaseHTTPRequestHandler):
                 search_ip = query
 
             q = QQwry()
-            q.load_file(join("data", "qqwry.dat"), loadindex=True)
+            q.load_file(join("data", "qqwry.dat"))
             if not isIP(search_ip):
                 search_ip = socket.gethostbyname(search_ip)
             info = q.lookup(search_ip)
