@@ -6,7 +6,6 @@ from urllib.parse import urlparse
 import ipaddress
 import socket
 
-
 def isIP(ip):
     try:
         ip = ipaddress.ip_address(ip)
@@ -21,9 +20,10 @@ class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
         self.send_header('Content-type', 'text/json')
+        self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         try:
-            search_ip = self.client_address[0]
+            search_ip = self.address_string()
             query = urlparse(self.path).query.split('=')[-1]
             if query:
                 search_ip = query
